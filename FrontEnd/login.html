@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/FrontEnd/assets/login.css">
+    <script src="/FrontEnd/assets/index.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <h1 class="logo">Sophie Bluel <span>Architecte d'intérieur</span></h1>
+        <nav>
+            <ul>
+                <li>projets</li>
+                <li>contact</li>
+                <li>login</li>
+                <li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!--MAIN-->
+    <main>
+        <div class="container">
+                <!-- Creastion du formulaire de connexion-->
+              <div class="FormulaireConnexion">
+                  <h2>Log In</h2>
+                  <form action="#" id="formConnexion" method="post">
+                      <div class="ZoneDeSaisie">
+                          <div class="ZoneDeSaisieEmail">
+                            <label>Email</label>
+                            <input type="email" required id="email">
+                          </div>
+                          <div class="ZoneDeSaisieMdp">
+                            <label >Password</label>
+                            <input type="password" required id="password">
+                          </div>
+                      </div>
+                      <div class="Connecter">
+                        <button type="submit">Se connecter</button>
+                      </div>
+                      
+                      <div class="MdpOublie">
+                          <a href="#">Mot de passe oublié</a>
+                      </div>
+                  </form>
+              </div>
+        </div>
+    </main>
+    
+</body>
+</html>
