@@ -124,54 +124,12 @@ li:hover {
 	text-align: center;
 	margin-bottom: 1em;
 }
-.categories nav {
-	margin-bottom: 30px;
-	display: flex;
-	justify-content: center;
-}
-
-.categories ul {
-	gap: 15px;
-}
-
-.categories li {
-	border: 1px solid #1D6154;
-	border-radius: 60px;
-	height: 37px;
-	font-size:18px;
-	font-weight: 700;
-	color: #1D6154;
-	display:flex;
-	align-items: center;
-	justify-content: center;
-}
-
-.categories li:hover {
-	background-color: #1D6154;
-	color: white;
-}
-
-.filtre1,.filtre2{
-	width: 100px;
-}
-
-.filtre3{
-	width: 154px;
-}
-.filtre4{
-	width: 198px;
-}
-.gallery {
+#gallery {
 	width: 100%;
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
 	grid-column-gap: 20px;
 	grid-row-gap: 20px;
-}
-
-.gallery img {
-	width: 100%;
-
 }
 #contact {
 	width: 50%;
