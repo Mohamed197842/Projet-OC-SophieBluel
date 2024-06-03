@@ -75,6 +75,7 @@ h1 > span {
 	font-family: 'Work Sans';
 	font-size:10px;
 	letter-spacing: 0.1em;
+;
 }
 
 h2{
@@ -87,6 +88,7 @@ nav ul {
 	display: flex;
 	align-items: center;
 	list-style-type: none;
+
 }
 nav li {
 	padding: 0 10px;
@@ -119,17 +121,45 @@ li:hover {
 #introduction p {
 	margin-bottom: 0.5em;
 }
-
 #portfolio h2 {
 	text-align: center;
 	margin-bottom: 1em;
 }
-#gallery {
+
+#filters{
+	display: flex;
+	width: 100%;
+	justify-content: center;
+	gap: 15px;
+	margin-bottom: 50px;
+}
+
+#filters button {
+	padding: 10px 20px 10px 20px;
+	border-radius: 60px;
+	border-color: #1D6154;
+	border: solid 1px;
+	background-color: white;
+	color:#1D6154;
+	font-size: 16px;
+	font-weight: 700;
+}
+#filters button:hover{
+	background-color: #1D6154;
+	color: white;
+}
+
+.gallery {
 	width: 100%;
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
 	grid-column-gap: 20px;
 	grid-row-gap: 20px;
+}
+
+.gallery img {
+	width: 100%;
+
 }
 #contact {
 	width: 50%;
@@ -179,4 +209,3 @@ footer nav ul {
 	justify-content: flex-end;
 	margin: 2em
 }
-

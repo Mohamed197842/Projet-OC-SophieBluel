@@ -42,6 +42,7 @@ nav ul {
 li:hover {
 	color: #B1663C;
 }
+
 /* Style du formulaire */
 .FormulaireConnexion {
     display: flex;

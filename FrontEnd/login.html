@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/FrontEnd/assets/login.css">
-    <script src="/FrontEnd/assets/index.js"></script>
+    <link rel="stylesheet" href="/assets/login.css">
+    <script src="/assets/login.js" defer></script>
     <title>Document</title>
 </head>
 <body>
@@ -32,11 +32,13 @@
                       <div class="ZoneDeSaisie">
                           <div class="ZoneDeSaisieEmail">
                             <label>Email</label>
-                            <input type="email" required id="email">
+                            <input type="email" id="email">
+                            <div id="error-message" style="color: red;"></div>
                           </div>
                           <div class="ZoneDeSaisieMdp">
                             <label >Password</label>
-                            <input type="password" required id="password">
+                            <input type="password" id="password">
+                            <div id="error-message" style="color: red;"></div>
                           </div>
                       </div>
                       <div class="Connecter">
