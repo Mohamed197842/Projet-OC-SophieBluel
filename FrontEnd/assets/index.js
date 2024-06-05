@@ -84,4 +84,49 @@ callApiCategories()
 
 
 
+// Fonction pour recuperer le token de la page de connexion
+function getToken(){
+  return localStorage.getItem('authToken');
+}
+
+// Fonction pour effectuer des changement si l'utilisateur est 'admin'
+function AdminUserChanges() {
+  const loginLink = document.getElementById('login');
+  if (loginLink){
+    loginLink.textContent = 'Log Out';
+    loginLink.href = '#';
+    //Ajout d'evenement lorsque l'ont click sur 'logout'
+    loginLink.addEventListener('click',(e)=>{
+      e.preventDefault;
+      // Supprimer le token et rediriger vers la page de connexion
+      localStorage.removeItem('authToken');
+      window.location.href = '/login.html';
+    })
+  }
+
+  const portfolio = document.querySelector("#porfolio");
+  if (portfolio){
+    const modifier = document.createElement('button');
+    modifier.innerText='modifier';
+    portfolio.appendChild(modifier)
+  }else {
+    console.error('Filters element not found');
+  }
+}
+
+
+//function pour verifier la presence du token lors d'une connexion et appliquer les changement si 'admin'
+function checkToken(){
+  const token = getToken()
   
+  if (!token) {
+    // Si pas de token, redirigez l'utilisateur vers la page de connexion
+    window.location.href = '/login.html';
+  } else{
+    AdminUserChanges() 
+    // Token présent, vous pouvez ajouter des vérifications supplémentaires ici si nécessaire
+    console.log('Token présent :',token);  
+  }
+}
+
+checkToken()
