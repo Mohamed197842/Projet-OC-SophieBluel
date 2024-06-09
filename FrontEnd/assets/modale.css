@@ -1,0 +1,28 @@
+
+
+#Modale{
+    width: 630px;
+    height: 670px;
+    border: solid 3px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#ajoutImg{
+    width: 420px;
+    height: 170px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    background-color: aqua;
+}
+
+#ajoutImg i {
+font-size: 76px;
+}
+
+#ajoutImg input{
+    display: none;
+}

@@ -23,12 +23,14 @@
     if (gallery) {
       gallery.innerHTML = ''; // Efface le contenu précédent de la galerie
       works.forEach(element => {
+        const figureElement = document.createElement('figure')
         const imgElement = document.createElement('img');
-        const titreElement = document.createElement('p');
+        const titreElement = document.createElement('figcaption');
         imgElement.src = element.imageUrl;
         titreElement.innerText = element.title;
-        gallery.appendChild(imgElement);
-        gallery.appendChild(titreElement);
+        gallery.appendChild(figureElement)
+        figureElement.appendChild(imgElement);
+        figureElement.appendChild(titreElement);
       });
     } else {
       console.error('Gallery element not found');
@@ -103,15 +105,25 @@ function AdminUserChanges() {
       window.location.href = '/login.html';
     })
   }
-
-  const portfolio = document.querySelector("#porfolio");
-  if (portfolio){
-    const modifier = document.createElement('button');
-    modifier.innerText='modifier';
-    portfolio.appendChild(modifier)
-  }else {
-    console.error('Filters element not found');
+  const filtres = document.querySelector("#filters");
+  if (filtres) {
+    // Supprimer tous les boutons de filtres
+    filtres.remove();
   }
+  const portfolio = document.querySelector("#portfolio")
+  if(portfolio){
+    const iconModifier = document.createElement('i')
+    const boutonModifier = document.createElement('button');
+    boutonModifier.innerText = 'Modifier';
+    //portfolio.appendChild(boutonModifier)//
+
+    const h2 = portfolio.querySelector('h2');
+    if (h2) {
+      // Insérer le bouton juste après le h2
+      h2.insertAdjacentElement('afterend', boutonModifier);
+    } 
+  }
+
 }
 
 
@@ -121,9 +133,8 @@ function checkToken(){
   
   if (!token) {
     // Si pas de token, redirigez l'utilisateur vers la page de connexion
-    window.location.href = '/login.html';
   } else{
-    AdminUserChanges() 
+    AdminUserChanges()
     // Token présent, vous pouvez ajouter des vérifications supplémentaires ici si nécessaire
     console.log('Token présent :',token);  
   }

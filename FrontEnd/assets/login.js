@@ -1,29 +1,4 @@
 
-/* 
-// Envoie des données vers l'API avec "post"
-
-const url = 'http://localhost:5678/api/users/login'
-const data = {
-    email: "sophie.bluel@test.tld",
-    password: "S0phie"
-};
-
-fetch (url,{
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(data)
-})
-.then( Response=> Response.json())
-.then(data =>{
-    console.log('Success:', data)
-})
-.catch((error) => {
-    console.error('Error:', error);
-}); */
-
-// Validation du formulaire de connexion 
 async function Login(){
     const inputEmail = document.getElementById("email");
     const inputPassword = document.getElementById("password");

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"/>
+    <link rel="stylesheet" href="assets/modale.css">
+    <title>Document</title>
+</head>
+<body>
+    <div id="Modale">
+        <button class="fa-solid fa-xmark"></button>
+        <h3>Galerie photo</h3>
+        <form id="formWorks">
+            <div id="ajoutImg">
+               <i class="fa-regular fa-image fa-2xs"></i>
+               <label for="photoProjet" class="btnAjout"> + Ajouter photo</label>
+               <input type="file" id="photoProjet" name="photoProjet">
+               <p id="format">jpg, png: 4mo max</p>
+            </div>
+            <label for="titre" id="labelTitre">Titre</label>
+            <input type="text" id="titre" name="titre">
+            <label for="categorie" id="labelCategorie">Categorie</label>
+            <select name="categorie" id="categorie">
+                <option value="" disabled selected></option>
+                <option value="Objet" ></option>
+                <option value="Appartements" ></option>
+                <option value="Hotels & restaurants" ></option>
+            </select>
+            <input type="submit" id="envoyerWork" value="valider">
+        </form>
+    </div>
+</body>
+</html>
