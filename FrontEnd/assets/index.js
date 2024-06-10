@@ -12,6 +12,7 @@
     const json = await fetcher.json();
     allWorks = json // Stocke les projets dans la variable globale
     displayWorks(allWorks); // Affiche tous les projets au chargement initial
+    displayWorksModale(allWorks); // Affiche tous les projets dans la modale au chargement initial 
 
   }
 
@@ -37,9 +38,6 @@
     }
 
   }
-
-
-
 // creation des filtres
 
 async function callApiCategories(){
@@ -134,24 +132,67 @@ function AdminUserChanges() {
     iconModifier.classList.add('fa-regular', 'fa-pen-to-square');
     boutonModifier.appendChild(iconModifier)
     boutonModifier.appendChild(document.createTextNode(' modifier')); 
-
     ajoutBtn.appendChild(boutonModifier);
+
+    boutonModifier.addEventListener('click', function() {
+      // Actions à effectuer lors du clic sur le bouton
+      console.log('Bouton modifier cliqué');
+      const afficherModale = document.querySelector('.modal-overlay');
+        
+      if (afficherModale) {
+          afficherModale.style.display = 'flex';
+          afficherModale.setAttribute('aria-hidden', 'false'); // Optionnel, pour l'accessibilité
+      } else {
+          console.error('Aucun élément avec la classe .modal-overlay trouvé.');
+      }
+    });
+  }
+  // Changement des diplay en fonction des 'click' dans la modale
+  const ajoutPhoto = document.getElementById('Ajout-projet')
+  const afficherModaleworks = document.getElementById('Modale-works')
+  const afficherModaleAjout = document.getElementById('ModaleAjoutPhoto')
+  if(ajoutPhoto){
+    ajoutPhoto.addEventListener('click',function() {
+      console.log('Bouton ajouter cliqué');
+      afficherModaleworks.style.display = 'none'
+      afficherModaleAjout.style.display = 'block'
+    })
+  } 
+  const fermerModale = document.querySelectorAll("button[name='boutonFermer']");
+  if (fermerModale.length > 0) {
+    fermerModale.forEach(fermerModale => {
+        fermerModale.addEventListener('click', function() {
+            console.log('Bouton fermé cliqué');
+            const afficherModale = document.querySelector('.modal-overlay');
+            afficherModale.style.display = 'none';
+            afficherModale.setAttribute('aria-hidden', 'true'); // Optionnel, pour l'accessibilité
+        });
+    });
+  } 
+
+  const retourModale = document.getElementById('flecheRetour')
+  if(retourModale){
+    retourModale.addEventListener('click', function(){
+      console.log('bouton retour cliquer')
+      afficherModaleAjout.style.display ='none'
+      afficherModaleworks.style.display = 'block'
+    })
   }
 
 }
 
-function displayWorks(works){
-  const gallery = document.querySelector("#Modale-content");
+function displayWorksModale(works){
+  const galleryModale = document.querySelector("#Modale-content");
   
-  if (gallery) {
-    gallery.innerHTML = ''; // Efface le contenu précédent de la galerie
+  if (galleryModale) {
+    galleryModale.innerHTML = ''; // Efface le contenu précédent de la galerie
     works.forEach(element => {
       const figureElement = document.createElement('figure')
       const imgElement = document.createElement('img');
       const logoSuppr = document.createElement('i')
       imgElement.src = element.imageUrl;
       logoSuppr.classList.add('fa-solid', 'fa-trash-can', 'trash')
-      gallery.appendChild(figureElement)
+      galleryModale.appendChild(figureElement)
       figureElement.appendChild(imgElement);
       figureElement.appendChild(logoSuppr)
     });
@@ -160,6 +201,5 @@ function displayWorks(works){
   }
 
 }
-
 
 checkToken()
