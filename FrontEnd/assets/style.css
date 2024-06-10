@@ -94,6 +94,14 @@ nav li {
 	font-size: 1.2em;
 }
 
+nav li a {
+	text-decoration: none;
+	color: black;
+}
+nav li a:hover{
+	color: #B1663C;
+}
+
 li:hover {
 	color: #B1663C;
 }
@@ -124,6 +132,7 @@ li:hover {
 	text-align: center;
 	margin-bottom: 1em;
 }
+
 #filters{
 	display: flex;
 	width: 100%;
@@ -206,4 +215,252 @@ footer nav ul {
 	display: flex;
 	justify-content: flex-end;
 	margin: 2em
+}
+
+/* Style pour la partie admin */
+
+#text-btnModifier{
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	gap: 40px;
+	align-items: baseline;
+}
+#text-btnModifier button{
+	display: flex;
+	gap: 10px;
+	border: none;
+	background: none;
+	cursor: pointer;
+	font-family: 'work sans';
+	font-size: 1.1em;
+	font-weight:400;
+}
+
+.modal-overlay {
+	position: fixed;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.3);
+	display: flex;
+}
+
+
+/* Style de la modale: Ajout nouveau projet */
+#ModaleAjoutPhoto {
+    width: 420px;
+    height: 670px;
+    padding-left: 105px;
+    padding-right: 105px;
+    margin: auto;
+    position: relative;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    font-family: 'Work Sans';
+	display: none;
+}
+
+#ModaleAjoutPhoto button.fa-solid.fa-arrow-left , #ModaleAjoutPhoto button.fa-solid.fa-xmark{
+    position: absolute;
+    top: 20px;
+    background: none;
+    border: none;
+    font-size: 20px;
+}
+
+#ModaleAjoutPhoto button.fa-solid.fa-arrow-left{
+    left: 20px;
+}
+#ModaleAjoutPhoto button.fa-solid.fa-xmark{
+    right: 20px;
+}
+
+#ModaleAjoutPhoto h3{
+    font-size: 26px;
+    font-weight: 500;
+    text-align: center;
+    padding-top: 40px;
+	margin-bottom: 40px;
+}
+
+#formWorks{
+    display: flex;
+    flex-direction: column;
+}
+/* Style de la zone d'ajout d'image */
+#ajoutImg{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color:#E8F1F6;
+    border-radius: 3px;
+    margin-bottom: 30px;
+    padding-top: 45px;
+    padding-bottom: 10px;
+}
+
+#ajoutImg .fa-regular.fa-image {
+    font-size: 65px;
+    color: #B9C5CC;
+    margin-bottom: 35px;
+  }
+
+#ajoutImg label {
+    background-color: #CBD6DC;
+	border: none;
+	border-radius: 50px;
+	font-size: 14px;
+    font-weight: 600;
+	line-height: 16px;
+	color: #306685;
+	text-align: center;
+	padding: 10px 33px;
+	cursor: pointer;
+}
+
+#ajoutImg p {
+    font-size: 0.750em;
+    color: #444444;
+}
+
+#ajoutImg input {
+    display: none;
+}
+
+/* Style des label titre et categorie */
+
+#titre,#categorie{
+    height: 51px;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+	border: none;
+    appearance: none;
+    margin-top: 15px;
+}
+#labelCategorie,#labelTitre{
+    font-size: 1em;
+}
+
+#labelCategorie{
+    padding-top: 20px;
+}
+
+#envoyerWork{
+    width: 237px;
+    height: 36px;
+    border-radius: 60px;
+	border: none;
+	color: #FFFFFF;
+    font-family: 'work sans';
+	font-size: 1em;
+	background-color: #A7A7A7;
+    margin: 40px auto 45px;
+    cursor: pointer;
+}
+#envoyerWork:hover {
+    background-color:rgba(29, 97, 84, 1);
+    color: white ;
+}
+
+.barre-Horizontale{
+  margin-top: 45px;
+  width: 100%; 
+  height: 1px;
+  background-color: #cccccc;
+}
+
+/* Style de la modale pour les tries de projets */
+
+#Modale-works{
+    width: 630px;
+    height: 670px;
+    margin: auto;
+    position: relative;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    font-family: 'Work Sans';
+}
+
+#Modale-works button.fa-solid.fa-xmark{
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 20px;
+}
+
+
+#Modale-works h3{
+    font-size: 26px;
+    font-weight: 500;
+    text-align: center;
+    padding-top: 50px;
+    margin-bottom: 50px;
+}
+#Modale-content {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 30px 10px;
+    margin-left: 105px;
+    margin-right: 105px;
+}
+
+#Modale-content figure{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+#Modale-content img {
+    width: 100%;
+    height: 102px; 
+    object-fit: cover;
+    display: block;
+    margin: 0;
+    padding: 0;
+}
+
+#bar-btn{
+    margin-left: 105px;
+    margin-right: 105px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#Ajout-projet{
+    width: 237px;
+    height: 36px;
+    border-radius: 60px;
+	border: none;
+	color: #FFFFFF;
+    font-family: 'work sans';
+	font-size: 1em;
+	background-color:rgba(29, 97, 84, 1);
+    cursor: pointer;
+    margin-top: 40px;
+}
+
+#Modale-content figure i {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    padding: 4px;
+	font-size: 10px;
+    cursor: pointer;
+    color: white;
+    background-color: black;
+    text-align: center;
+    border-radius: 2px;
 }

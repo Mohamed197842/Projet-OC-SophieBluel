@@ -86,9 +86,26 @@ callApiCategories()
 
 
 
+// JAVASCRIPT DE LA PARTIE ADMIN//
+
+
+
 // Fonction pour recuperer le token de la page de connexion
 function getToken(){
   return localStorage.getItem('authToken');
+}
+
+//function pour verifier la presence du token lors d'une connexion et appliquer les changement si 'admin'
+function checkToken(){
+  const token = getToken()
+  
+  if (!token) {
+    // Si pas de token, redirigez l'utilisateur vers la page de connexion
+  } else{
+    AdminUserChanges()
+    // Token présent, vous pouvez ajouter des vérifications supplémentaires ici si nécessaire
+    console.log('Token présent :',token);  
+  }
 }
 
 // Fonction pour effectuer des changement si l'utilisateur est 'admin'
@@ -110,34 +127,39 @@ function AdminUserChanges() {
     // Supprimer tous les boutons de filtres
     filtres.remove();
   }
-  const portfolio = document.querySelector("#portfolio")
-  if(portfolio){
-    const iconModifier = document.createElement('i')
+  const ajoutBtn = document.querySelector("#text-btnModifier")
+  if(ajoutBtn){
     const boutonModifier = document.createElement('button');
-    boutonModifier.innerText = 'Modifier';
-    //portfolio.appendChild(boutonModifier)//
+    const iconModifier = document.createElement('i')
+    iconModifier.classList.add('fa-regular', 'fa-pen-to-square');
+    boutonModifier.appendChild(iconModifier)
+    boutonModifier.appendChild(document.createTextNode(' modifier')); 
 
-    const h2 = portfolio.querySelector('h2');
-    if (h2) {
-      // Insérer le bouton juste après le h2
-      h2.insertAdjacentElement('afterend', boutonModifier);
-    } 
+    ajoutBtn.appendChild(boutonModifier);
   }
 
 }
 
-
-//function pour verifier la presence du token lors d'une connexion et appliquer les changement si 'admin'
-function checkToken(){
-  const token = getToken()
+function displayWorks(works){
+  const gallery = document.querySelector("#Modale-content");
   
-  if (!token) {
-    // Si pas de token, redirigez l'utilisateur vers la page de connexion
-  } else{
-    AdminUserChanges()
-    // Token présent, vous pouvez ajouter des vérifications supplémentaires ici si nécessaire
-    console.log('Token présent :',token);  
+  if (gallery) {
+    gallery.innerHTML = ''; // Efface le contenu précédent de la galerie
+    works.forEach(element => {
+      const figureElement = document.createElement('figure')
+      const imgElement = document.createElement('img');
+      const logoSuppr = document.createElement('i')
+      imgElement.src = element.imageUrl;
+      logoSuppr.classList.add('fa-solid', 'fa-trash-can', 'trash')
+      gallery.appendChild(figureElement)
+      figureElement.appendChild(imgElement);
+      figureElement.appendChild(logoSuppr)
+    });
+  } else {
+    console.error('Gallery element not found');
   }
+
 }
+
 
 checkToken()

@@ -7,6 +7,7 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"/>
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
 	<script src="/assets/index.js" defer></script>
@@ -36,7 +37,9 @@
 		</article>
 	</section>
 	<section id="portfolio">
-		<h2>Mes Projets</h2>
+		<div id="text-btnModifier">
+		 <h2>Mes Projets</h2>
+		</div>
 		<div id="filters">
 
 		</div>
@@ -65,5 +68,45 @@
 		</ul>
 	</nav>
 </footer>
+
+<div class="modal-overlay" aria-hidden="true" role="dialog">
+	<!-- premiere modale -->
+	<div id="Modale-works" class="modal" aria-labelledby="title-works">
+		<!-- Contenu de la deuxième modale -->
+		<button class="fa-solid fa-xmark"></button>
+		<h3 id="title-galerie-photo">Galerie photo</h3>
+		<div id="Modale-content">
+		</div>
+		<div id="bar-btn">
+		  <div class="barre-Horizontale"></div>
+		  <button id="Ajout-projet">Ajouter une photo</button>
+		</div>
+	</div>
+	<!-- deuxieme modale -->
+	<div id="ModaleAjoutPhoto" class="modal" aria-labelledby="title-ajout-photo">
+		<button class="fa-solid fa-arrow-left"></button>
+		<button class="fa-solid fa-xmark"></button>
+		<h3 id="title-ajout-photo">Ajout photo</h3>
+		<form id="formWorks">
+			<div id="ajoutImg">
+			   <i class="fa-regular fa-image fa-2xs"></i>
+			   <label for="photoProjet" class="btnAjout"> + Ajouter photo</label>
+			   <input type="file" id="photoProjet" name="photoProjet">
+			   <p id="format">jpg, png: 4mo max</p>
+			</div>
+			<label for="titre" id="labelTitre">Titre</label>
+			<input type="text" id="titre" name="titre">
+			<label for="categorie" id="labelCategorie">Catégorie</label>
+			<select name="categorie" id="categorie">
+				<option value="" disabled selected></option>
+				<option value="Objet">Objet</option>
+				<option value="Appartements">Appartements</option>
+				<option value="Hotels & restaurants">Hotels & restaurants</option>
+			</select>
+			<div class="barre-Horizontale"></div>
+			<input type="submit" id="envoyerWork" value="Valider">
+		</form>
+	</div>
+</div>
 </body>
 </html>
