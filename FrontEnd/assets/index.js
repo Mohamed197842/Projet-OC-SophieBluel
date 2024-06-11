@@ -106,24 +106,55 @@ function checkToken(){
   }
 }
 
+// Fonction qui reset la page 'admin' par default
+function resetPage(){
+  
+  const loginLink = document.getElementById('login');
+  if (loginLink) {
+    loginLink.textContent = 'Log In';
+    loginLink.href = '/login.html';
+    loginLink.removeEventListener('click', logoutHandler); // Supprimer l'événement de déconnexion
+  }
+
+  const filtres = document.querySelector("#filters");
+  if (filtres) {
+    // Supprimer tous les boutons de filtres
+    filtres.style.display ='flex';
+  }
+
+  const ajoutBtn = document.querySelector("#text-btnModifier");
+  if (ajoutBtn) {
+    // Supprimer le bouton modifier si présent
+    const boutonModifier = ajoutBtn.querySelector('button');
+    if (boutonModifier) {
+      ajoutBtn.removeChild(boutonModifier);
+    }
+  }
+
+}
+// Fonction qui va appliquer la fonction de 'reset' lorsque l'ont appuie sur "logout"
+function logoutHandler(e) {
+  e.preventDefault(); // Empêcher le comportement par défaut du lien
+  console.log('Logout handler called'); // Log pour débogage
+  // Supprimer le token et réinitialiser l'état de la page sans redirection
+  localStorage.removeItem('authToken');
+  resetPage();
+}
+
+
 // Fonction pour effectuer des changement si l'utilisateur est 'admin'
 function AdminUserChanges() {
   const loginLink = document.getElementById('login');
   if (loginLink){
     loginLink.textContent = 'Log Out';
     loginLink.href = '#';
-    //Ajout d'evenement lorsque l'ont click sur 'logout'
-    loginLink.addEventListener('click',(e)=>{
-      e.preventDefault;
-      // Supprimer le token et rediriger vers la page de connexion
-      localStorage.removeItem('authToken');
-      window.location.href = '/login.html';
-    })
+    //Ajout d'evenement lorsque l'ont click sur 'logout' par appliquer la fonction du bouton "logout" qui remet la page par default
+    loginLink.addEventListener('click',logoutHandler)
   }
   const filtres = document.querySelector("#filters");
   if (filtres) {
     // Supprimer tous les boutons de filtres
-    filtres.remove();
+    filtres.style.display ='none';
   }
   const ajoutBtn = document.querySelector("#text-btnModifier")
   if(ajoutBtn){
@@ -201,5 +232,7 @@ function displayWorksModale(works){
   }
 
 }
+
+
 
 checkToken()
