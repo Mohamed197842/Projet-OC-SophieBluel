@@ -13,6 +13,7 @@
     allWorks = json // Stocke les projets dans la variable globale
     displayWorks(allWorks); // Affiche tous les projets au chargement initial
     displayWorksModale(allWorks); // Affiche tous les projets dans la modale au chargement initial 
+    console.log(json);
 
   }
 
@@ -27,8 +28,13 @@
         const figureElement = document.createElement('figure')
         const imgElement = document.createElement('img');
         const titreElement = document.createElement('figcaption');
+        
+        figureElement.setAttribute('class', `work-item category-id-0 category-id-${element.categoryId}`);
+        figureElement.setAttribute('id', `work-item-${element.id}`);
+        
         imgElement.src = element.imageUrl;
         titreElement.innerText = element.title;
+        
         gallery.appendChild(figureElement)
         figureElement.appendChild(imgElement);
         figureElement.appendChild(titreElement);
@@ -81,6 +87,7 @@ function filterWorks(categoryId) {
 callApiWorks()
 
 callApiCategories()
+
 
 
 
@@ -188,7 +195,8 @@ function AdminUserChanges() {
       afficherModaleworks.style.display = 'none'
       afficherModaleAjout.style.display = 'block'
     })
-  } 
+  }
+  // Fermer la modale avec le bouton 'croix' 
   const fermerModale = document.querySelectorAll("button[name='boutonFermer']");
   if (fermerModale.length > 0) {
     fermerModale.forEach(fermerModale => {
@@ -200,7 +208,7 @@ function AdminUserChanges() {
         });
     });
   } 
-
+  // retour en arriere avec le bouton 'fleche'
   const retourModale = document.getElementById('flecheRetour')
   if(retourModale){
     retourModale.addEventListener('click', function(){
@@ -211,7 +219,7 @@ function AdminUserChanges() {
   }
 
 }
-
+ // affichage des projet dans la gallerie de la modale
 function displayWorksModale(works){
   const galleryModale = document.querySelector("#Modale-content");
   
@@ -220,12 +228,23 @@ function displayWorksModale(works){
     works.forEach(element => {
       const figureElement = document.createElement('figure')
       const imgElement = document.createElement('img');
-      const logoSuppr = document.createElement('i')
+      const logoSuppr = document.createElement('i');
+
+      figureElement.setAttribute('class', `work-item category-id-0 category-id-${element.categoryId}`);
+      figureElement.setAttribute('id', `work-item-${element.id}`);
+
       imgElement.src = element.imageUrl;
       logoSuppr.classList.add('fa-solid', 'fa-trash-can', 'trash')
-      galleryModale.appendChild(figureElement)
+
+      galleryModale.appendChild(figureElement);
       figureElement.appendChild(imgElement);
-      figureElement.appendChild(logoSuppr)
+      figureElement.appendChild(logoSuppr);
+
+      // Configurer le bouton de suppression
+      logoSuppr.addEventListener('click', () => {
+        console.log('Deleting work with ID:', element.id);
+        deleteWorkById(element.id);
+      });
     });
   } else {
     console.error('Gallery element not found');
@@ -233,6 +252,41 @@ function displayWorksModale(works){
 
 }
 
-
-
 checkToken()
+
+// Fonction pour ajouter ou supprimer un projet de l'api avec la modale
+
+async function deleteWorkById(workId) {
+  const url = `http://localhost:5678/api/works/${workId}`;
+  const token = getToken();
+
+  console.log('Token récupéré depuis le localStorage:', token);
+
+  try {
+    const response = await fetch(url, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer '+ token
+      }
+    });
+
+    if (response.ok) {
+      // Supprime le projet de la liste globale allWorks
+      allWorks = allWorks.filter(work => work.id !== workId);
+      
+      // Met à jour l'affichage après la suppression
+      displayWorks(allWorks);
+      displayWorksModale(allWorks);
+      
+      console.log(`Project with ID ${workId} deleted successfully.`);
+    } else {
+      console.error(`Failed to delete project with ID ${workId}:`, response.statusText);
+    }
+  } catch (error) {
+    console.error('Error deleting project:', error);
+  }
+}
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
