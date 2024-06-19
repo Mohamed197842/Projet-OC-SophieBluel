@@ -256,6 +256,9 @@ checkToken()
 
 // Fonction pour ajouter ou supprimer un projet de l'api avec la modale
 
+//Fonction pour supprimer un projet 
+
+
 async function deleteWorkById(workId) {
   const url = `http://localhost:5678/api/works/${workId}`;
   const token = getToken();
@@ -288,5 +291,59 @@ async function deleteWorkById(workId) {
   }
 }
 
+// Fetch to add category options in modal edit
+fetch("http://localhost:5678/api/categories")
+.then(function(response) {
+  if(response.ok) {
+    return response.json();
+  }
+})
+.then(function(data) {
+  const categories = data;
+  // Looping on each categories
+  categories.forEach((category) => {
+  // Creation <options> in modal edit
+  const myOption = document.createElement('option');
+  myOption.setAttribute('value', category.id);
+  myOption.textContent = category.name;
+  // Adding the new <option> into the existing select.choice-category
+  document.querySelector("#categorie").appendChild(myOption);
+  });
+})
+.catch(function(err) {
+  console.log(err);
+});
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+
+document.querySelector('#formWorks').addEventListener('submit',function(e){
+  e.preventDefault();
+  console.log('formulaire envoyé avec succées')
+
+  const formdata = new FormData()
+  formdata.append('image', document.getElementById('photoProjet').files[0]);
+  formdata.append('title', document.getElementById('titre').value);
+  formdata.append('category',document.getElementById('categorie').value);
+
+  const token = getToken();
+
+  fetch('http://localhost:5678/api/works',{
+    method : 'POST',
+    headers: {
+      'Authorization': 'Bearer '+ token
+    },
+    body : formdata
+  })
+  .then(function(response){
+   if (response.ok){
+    console.log("Projet ajouté avec succés!");
+    return response.json();
+   }
+   else {
+    console.log('Projet pas pu etre ajouté')
+   }
+  })
+  .catch(function(error) {
+    console.error('Erreur lors de l\'ajout du projet:', error);
+  });
+})
+ 

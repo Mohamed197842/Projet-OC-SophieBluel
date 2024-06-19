@@ -87,7 +87,7 @@
 		<button id="flecheRetour"     class="fa-solid fa-arrow-left"></button>
 		<button class="fa-solid fa-xmark" name="boutonFermer"></button>
 		<h3 id="title-ajout-photo">Ajout photo</h3>
-		<form id="formWorks">
+		<form enctype="multipart/form-data" id="formWorks" >
 			<div id="ajoutImg">
 			   <i class="fa-regular fa-image fa-2xs"></i>
 			   <label for="photoProjet" class="btnAjout"> + Ajouter photo</label>
@@ -99,9 +99,6 @@
 			<label for="categorie" id="labelCategorie">Catégorie</label>
 			<select name="categorie" id="categorie">
 				<option value="" disabled selected></option>
-				<option value="Objet">Objet</option>
-				<option value="Appartements">Appartements</option>
-				<option value="Hotels & restaurants">Hotels & restaurants</option>
 			</select>
 			<div class="barre-Horizontale"></div>
 			<input type="submit" id="envoyerWork" value="Valider">
