@@ -309,11 +309,9 @@ fetch("http://localhost:5678/api/categories")
     console.log(err);
   });
 
-// Ajout de nouveau projets avec le validateur du formulaire
-
 document.querySelector("#formWorks").addEventListener("submit", function (e) {
   e.preventDefault();
-  console.log("formulaire envoyé avec succées");
+  console.log("formulaire envoyé avec succès");
 
   const formdata = new FormData();
   formdata.append("image", document.getElementById("photoProjet").files[0]);
@@ -331,25 +329,24 @@ document.querySelector("#formWorks").addEventListener("submit", function (e) {
   })
     .then(function (response) {
       if (response.ok) {
-        console.log("Projet ajouté avec succés!");
-        // Lire et convertir le corps de la réponse en JSON
+        console.log("Projet ajouté avec succès!");
         return response.json();
       } else {
-        console.log("Projet pas pu etre ajouté");
+        console.log("Projet pas pu être ajouté");
+        throw new Error("Erreur lors de l'ajout du projet");
       }
     })
     .then(function (newWork) {
-      // La valeur de newWork est l'objet JSON du projet ajouté
+      if (!newWork || !newWork.categoryId) {
+        throw new Error("Projet ajouté, mais les données sont invalides");
+      }
       console.log("Nouveau projet:", newWork);
 
-      // Ajoute le nouveau projet à la liste globale allWorks
       allWorks.push(newWork);
 
-      // Met à jour l'affichage après l'ajout
       displayWorks(allWorks);
       displayWorksModale(allWorks);
 
-      // Changement de modale apres le succés de l'ajout du nouveau projet
       const afficherModaleworks = document.getElementById("Modale-works");
       const afficherModaleAjout = document.getElementById("ModaleAjoutPhoto");
 
