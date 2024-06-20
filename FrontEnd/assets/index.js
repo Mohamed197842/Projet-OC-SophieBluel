@@ -137,6 +137,9 @@ function logoutHandler(e) {
   // Supprimer le token et réinitialiser l'état de la page sans redirection
   localStorage.removeItem("authToken");
   resetPage();
+
+  // Rafraîchir la page
+  location.reload();
 }
 
 // Fonction pour effectuer des changement si l'utilisateur est 'admin'
@@ -235,8 +238,21 @@ function displayWorksModale(works) {
 
       // Configurer le bouton de suppression
       logoSuppr.addEventListener("click", () => {
-        console.log("Deleting work with ID:", element.id);
-        deleteWorkById(element.id);
+        const token = getToken();
+        let message = "";
+
+        if (!token) {
+          console.log("Vous ne pouvez pas acceder a cette requete");
+          message = "Vous ne pouvez pas acceder a cette requete";
+        }
+        if (message) {
+          // Affiche le message d'erreur dans la div 'error-message'
+          document.getElementById("error-message-suppression").textContent =
+            message;
+        } else {
+          console.log("Token récupéré depuis le localStorage:", token);
+          deleteWorkById(element.id);
+        }
       });
     });
   } else {

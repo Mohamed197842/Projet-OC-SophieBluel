@@ -546,3 +546,8 @@ footer nav ul {
   text-align: center;
   border-radius: 2px;
 }
+
+#error-message-suppression {
+  margin-left: 107px;
+  margin-top: 10px;
+}
