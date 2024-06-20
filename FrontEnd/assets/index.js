@@ -311,7 +311,29 @@ fetch("http://localhost:5678/api/categories")
 
 document.querySelector("#formWorks").addEventListener("submit", function (e) {
   e.preventDefault();
-  console.log("formulaire envoyé avec succès");
+
+  // Verification des champs requis
+
+  const imageFile = document.getElementById("photoProjet").files[0];
+  const title = document.getElementById("titre").value.trim();
+  const category = document.getElementById("categorie").value.trim();
+
+  let message = "";
+
+  // Vérifier si tous les champs sont remplis
+  if (!imageFile) {
+    message = "Veuillez sélectionner une image pour le projet.";
+  } else if (title === "") {
+    message = "Veuillez entrer un titre pour le projet.";
+  } else if (category === "") {
+    message = "Veuillez sélectionner une catégorie pour le projet.";
+  }
+
+  // Si un message d'erreur existe, l'afficher et arrêter l'exécution
+  if (message) {
+    document.getElementById("error-message").textContent = message;
+    return; // Arrêter l'exécution de la fonction si les champs ne sont pas remplis
+  }
 
   const formdata = new FormData();
   formdata.append("image", document.getElementById("photoProjet").files[0]);
