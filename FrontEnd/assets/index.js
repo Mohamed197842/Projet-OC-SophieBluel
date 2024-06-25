@@ -169,10 +169,14 @@ function AdminUserChanges() {
       // Actions à effectuer lors du clic sur le bouton
       console.log("Bouton modifier cliqué");
       const afficherModale = document.querySelector(".modal-overlay");
+      const afficherModaleworks = document.getElementById("Modale-works");
+      const afficherModaleAjout = document.getElementById("ModaleAjoutPhoto");
 
       if (afficherModale) {
         afficherModale.style.display = "flex";
-        afficherModale.setAttribute("aria-hidden", "false"); // Optionnel, pour l'accessibilité
+        afficherModale.setAttribute("aria-hidden", "false");
+        afficherModaleworks.style.display = "block";
+        afficherModaleAjout.style.display = "none";
       } else {
         console.error("Aucun élément avec la classe .modal-overlay trouvé.");
       }
@@ -270,8 +274,6 @@ async function deleteWorkById(workId) {
   const url = `http://localhost:5678/api/works/${workId}`;
   const token = getToken();
 
-  console.log("Token récupéré depuis le localStorage:", token);
-
   try {
     const response = await fetch(url, {
       method: "DELETE",
@@ -324,6 +326,7 @@ fetch("http://localhost:5678/api/categories")
   .catch(function (err) {
     console.log(err);
   });
+// Formulaire d'ajout de nouveau travaux
 
 document.querySelector("#formWorks").addEventListener("submit", function (e) {
   e.preventDefault();
@@ -387,6 +390,7 @@ document.querySelector("#formWorks").addEventListener("submit", function (e) {
 
       const afficherModaleworks = document.getElementById("Modale-works");
       const afficherModaleAjout = document.getElementById("ModaleAjoutPhoto");
+      const errorMessage = document.getElementById("error-message");
 
       afficherModaleAjout.style.display = "none";
       afficherModaleworks.style.display = "block";
@@ -394,6 +398,26 @@ document.querySelector("#formWorks").addEventListener("submit", function (e) {
     .catch(function (error) {
       console.error("Erreur lors de l'ajout du projet:", error);
     });
+
+  this.reset(); // Réinitialise le formulaire
+
+  // Effacer le message d'erreur après réinitialisation du formulaire
+  document.getElementById("error-message").textContent = "";
+
+  // Réinitialiser l'aperçu de l'image
+  const previewImage = document.getElementById("previewImage");
+  if (previewImage) {
+    previewImage.remove();
+  }
+  const iconImg = document.querySelector("#iconImg");
+  const btnAjoutPhoto = document.querySelector(".btnAjout");
+  const maxSize = document.querySelector("#format");
+  const ajtImg = document.querySelector("#ajoutImg");
+
+  iconImg.style.display = "block";
+  btnAjoutPhoto.style.display = "block";
+  maxSize.style.display = "block";
+  ajtImg.style.padding = "45px 0px 10px 0px";
 });
 
 // Ajout de l'image en preview dans la modale "Ajout projet"

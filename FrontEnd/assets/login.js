@@ -15,6 +15,11 @@ async function Login() {
       message = "Veuillez entrer votre email.";
     } else if (passwordValue === "") {
       message = "Veuillez entrer votre mot de passe.";
+    } else if (
+      emailValue != "sophie.bluel@test.tld" ||
+      passwordValue != "S0phie"
+    ) {
+      message = "identifiants ou mots de passe incorrecte";
     }
 
     if (message) {
@@ -50,7 +55,7 @@ async function Login() {
             // Rediriger vers une autre page ou afficher un message de succès
             console.log("Connexion réussie");
             // Redirection exemple
-            window.location.href = "http://127.0.0.1:5500/index.html";
+            window.location.href = "http://127.0.0.1:5501/index.html";
           } else {
             // Afficher le message d'erreur de l'API
             document.getElementById("error-message").textContent =
@@ -66,5 +71,3 @@ async function Login() {
 }
 
 Login();
-
-//"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTcxNzU4OTExNywiZXhwIjoxNzE3Njc1NTE3fQ.DhQriY5Jk8pTTcQN-Mq66Q1wNzmcXw74Ta6Ru8HZfTw"//
