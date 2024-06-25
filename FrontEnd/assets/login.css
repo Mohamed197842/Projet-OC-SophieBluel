@@ -41,6 +41,10 @@ li {
   cursor: pointer;
 }
 
+#login {
+  font-weight: bold;
+}
+
 li:hover {
   color: #b1663c;
 }
