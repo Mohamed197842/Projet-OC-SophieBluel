@@ -4,10 +4,13 @@ async function Login() {
   const form = document.getElementById("formConnexion");
   const url = "http://localhost:5678/api/users/login";
 
+  // @ts-ignore
   form.addEventListener("submit", (e) => {
     e.preventDefault();
 
+    // @ts-ignore
     const emailValue = inputEmail.value.trim();
+    // @ts-ignore
     const passwordValue = inputPassword.value.trim();
     let message = "";
 
@@ -24,6 +27,7 @@ async function Login() {
 
     if (message) {
       // Affiche le message d'erreur dans la div 'error-message'
+      // @ts-ignore
       document.getElementById("error-message").textContent = message;
     } else {
       // Validation des identifiants
@@ -47,23 +51,22 @@ async function Login() {
           return response.json();
         })
         .then((data) => {
-          console.log(data);
           // Gerer la reponse de l'api
           if (data.token) {
             // Stocker le token
             localStorage.setItem("authToken", data.token);
-            // Rediriger vers une autre page ou afficher un message de succès
-            console.log("Connexion réussie");
-            // Redirection exemple
+            // Rediriger vers une autre page
             window.location.href = "http://127.0.0.1:5501/index.html";
           } else {
             // Afficher le message d'erreur de l'API
+            // @ts-ignore
             document.getElementById("error-message").textContent =
               data.message || "Erreur de connexion";
           }
         })
         .catch((error) => {
           // Gérer les erreurs de l'appel API
+          // @ts-ignore
           document.getElementById("error-message").textContent = error.message;
         });
     }

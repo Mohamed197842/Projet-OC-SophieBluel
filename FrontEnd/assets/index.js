@@ -10,7 +10,6 @@ async function callApiWorks() {
   allWorks = json; // Stocke les projets dans la variable globale
   displayWorks(allWorks); // Affiche tous les projets au chargement initial
   displayWorksModale(allWorks); // Affiche tous les projets dans la modale au chargement initial
-  console.log(json);
 }
 
 // Afficher les projets dans la galerie
@@ -101,8 +100,6 @@ function checkToken() {
     // Si pas de token, redirigez l'utilisateur vers la page de connexion
   } else {
     AdminUserChanges();
-    // Token présent, vous pouvez ajouter des vérifications supplémentaires ici si nécessaire
-    console.log("Token présent :", token);
   }
 }
 
@@ -132,21 +129,34 @@ function resetPage() {
 }
 // Fonction qui va appliquer la fonction de 'reset' lorsque l'ont appuie sur "logout"
 function logoutHandler(e) {
-  e.preventDefault(); // Empêcher le comportement par défaut du lien
-  console.log("Logout handler called"); // Log pour débogage
+  e.preventDefault(); // Empêcher le comportement par défaut du lien;
   // Supprimer le token et réinitialiser l'état de la page sans redirection
   localStorage.removeItem("authToken");
   resetPage();
-
   // Rafraîchir la page
   location.reload();
 }
 
 // Fonction pour effectuer des changement si l'utilisateur est 'admin'
 function AdminUserChanges() {
+
+  //display top menu bar
+  const body = document.querySelector("body");
+  const topBar = document.createElement("div");
+  const editMode = document.createElement("p");
+
+  topBar.className = "topBar";
+  editMode.innerHTML = `<i class="fa-regular fa-pen-to-square"></i>Mode édition`;
+
+  body.insertAdjacentElement("afterbegin", topBar);
+  topBar.append(editMode);
+
+  const header = document.querySelector('header')
+  header.style.margin = "80px 0"
+
   const loginLink = document.getElementById("login");
   if (loginLink) {
-    loginLink.textContent = "Log Out";
+    loginLink.textContent = "LogOut";
     loginLink.href = "#";
     //Ajout d'evenement lorsque l'ont click sur 'logout' par appliquer la fonction du bouton "logout" qui remet la page par default
     loginLink.addEventListener("click", logoutHandler);
@@ -166,8 +176,8 @@ function AdminUserChanges() {
     ajoutBtn.appendChild(boutonModifier);
 
     boutonModifier.addEventListener("click", function () {
+      
       // Actions à effectuer lors du clic sur le bouton
-      console.log("Bouton modifier cliqué");
       const afficherModale = document.querySelector(".modal-overlay");
       const afficherModaleworks = document.getElementById("Modale-works");
       const afficherModaleAjout = document.getElementById("ModaleAjoutPhoto");
@@ -188,7 +198,6 @@ function AdminUserChanges() {
   const afficherModaleAjout = document.getElementById("ModaleAjoutPhoto");
   if (ajoutPhoto) {
     ajoutPhoto.addEventListener("click", function () {
-      console.log("Bouton ajouter cliqué");
       afficherModaleworks.style.display = "none";
       afficherModaleAjout.style.display = "block";
     });
@@ -198,10 +207,33 @@ function AdminUserChanges() {
   if (fermerModale.length > 0) {
     fermerModale.forEach((fermerModale) => {
       fermerModale.addEventListener("click", function () {
-        console.log("Bouton fermé cliqué");
         const afficherModale = document.querySelector(".modal-overlay");
+
         afficherModale.style.display = "none";
         afficherModale.setAttribute("aria-hidden", "true"); // Optionnel, pour l'accessibilité
+        
+        // Réinitialiser l'aperçu de l'image
+        const previewImage = document.getElementById("previewImage");
+        if (previewImage) {
+           previewImage.remove();
+        }
+        // Réinitialiser les champs du formulaire
+        const form = document.getElementById("formWorks"); 
+        if (form) {
+          form.reset();
+        }
+         const iconImg = document.querySelector("#iconImg");
+         const btnAjoutPhoto = document.querySelector(".btnAjout");
+         const maxSize = document.querySelector("#format");
+         const ajtImg = document.querySelector("#ajoutImg");
+
+         iconImg.style.display = "block";
+         btnAjoutPhoto.style.display = "block";
+         maxSize.style.display = "block";
+         ajtImg.style.padding = "45px 0px 10px 0px";
+
+        // Effacer le message d'erreur après réinitialisation du formulaire
+        document.getElementById("error-message").textContent = "";
       });
     });
   }
@@ -209,9 +241,32 @@ function AdminUserChanges() {
   const retourModale = document.getElementById("flecheRetour");
   if (retourModale) {
     retourModale.addEventListener("click", function () {
-      console.log("bouton retour cliquer");
       afficherModaleAjout.style.display = "none";
       afficherModaleworks.style.display = "block";
+
+      // Réinitialiser l'aperçu de l'image
+     const previewImage = document.getElementById("previewImage");
+     if (previewImage) {
+      previewImage.remove();
+     }
+      // Réinitialiser les champs du formulaire
+     const form = document.getElementById("formWorks"); // Remplacez "formId" par l'ID de votre formulaire
+     if (form) {
+      form.reset();
+     }
+     
+     const iconImg = document.querySelector("#iconImg");
+     const btnAjoutPhoto = document.querySelector(".btnAjout");
+     const maxSize = document.querySelector("#format");
+     const ajtImg = document.querySelector("#ajoutImg");
+
+     iconImg.style.display = "block";
+     btnAjoutPhoto.style.display = "block";
+     maxSize.style.display = "block";
+     ajtImg.style.padding = "45px 0px 10px 0px";
+
+     // Effacer le message d'erreur après réinitialisation du formulaire
+     document.getElementById("error-message").textContent = "";
     });
   }
 }
@@ -246,7 +301,6 @@ function displayWorksModale(works) {
         let message = "";
 
         if (!token) {
-          console.log("Vous ne pouvez pas acceder a cette requete");
           message = "Vous ne pouvez pas acceder a cette requete";
         }
         if (message) {
@@ -254,7 +308,6 @@ function displayWorksModale(works) {
           document.getElementById("error-message-suppression").textContent =
             message;
         } else {
-          console.log("Token récupéré depuis le localStorage:", token);
           deleteWorkById(element.id);
         }
       });
@@ -291,7 +344,6 @@ async function deleteWorkById(workId) {
       displayWorks(allWorks);
       displayWorksModale(allWorks);
 
-      console.log(`Project with ID ${workId} deleted successfully.`);
     } else {
       console.error(
         `Failed to delete project with ID ${workId}:`,
@@ -326,6 +378,8 @@ fetch("http://localhost:5678/api/categories")
   .catch(function (err) {
     console.log(err);
   });
+
+  
 // Formulaire d'ajout de nouveau travaux
 
 document.querySelector("#formWorks").addEventListener("submit", function (e) {
@@ -336,7 +390,6 @@ document.querySelector("#formWorks").addEventListener("submit", function (e) {
   const imageFile = document.getElementById("photoProjet").files[0];
   const title = document.getElementById("titre").value.trim();
   const category = document.getElementById("categorie").value.trim();
-
   let message = "";
 
   // Vérifier si tous les champs sont remplis
@@ -355,6 +408,7 @@ document.querySelector("#formWorks").addEventListener("submit", function (e) {
   }
 
   const formdata = new FormData();
+
   formdata.append("image", document.getElementById("photoProjet").files[0]);
   formdata.append("title", document.getElementById("titre").value);
   formdata.append("category", document.getElementById("categorie").value);
@@ -370,10 +424,8 @@ document.querySelector("#formWorks").addEventListener("submit", function (e) {
   })
     .then(function (response) {
       if (response.ok) {
-        console.log("Projet ajouté avec succès!");
         return response.json();
       } else {
-        console.log("Projet pas pu être ajouté");
         throw new Error("Erreur lors de l'ajout du projet");
       }
     })
@@ -381,7 +433,6 @@ document.querySelector("#formWorks").addEventListener("submit", function (e) {
       if (!newWork || !newWork.categoryId) {
         throw new Error("Projet ajouté, mais les données sont invalides");
       }
-      console.log("Nouveau projet:", newWork);
 
       allWorks.push(newWork);
 
@@ -390,7 +441,6 @@ document.querySelector("#formWorks").addEventListener("submit", function (e) {
 
       const afficherModaleworks = document.getElementById("Modale-works");
       const afficherModaleAjout = document.getElementById("ModaleAjoutPhoto");
-      const errorMessage = document.getElementById("error-message");
 
       afficherModaleAjout.style.display = "none";
       afficherModaleworks.style.display = "block";
@@ -402,6 +452,7 @@ document.querySelector("#formWorks").addEventListener("submit", function (e) {
   this.reset(); // Réinitialise le formulaire
 
   // Effacer le message d'erreur après réinitialisation du formulaire
+
   document.getElementById("error-message").textContent = "";
 
   // Réinitialiser l'aperçu de l'image
@@ -422,21 +473,24 @@ document.querySelector("#formWorks").addEventListener("submit", function (e) {
 
 // Ajout de l'image en preview dans la modale "Ajout projet"
 
+
 document.querySelector("#photoProjet").addEventListener("change", () => {
-  console.log("bouton ajout photo cliquer");
 
   let fileInput = document.getElementById("photoProjet");
   const maxFileSize = 4 * 1024 * 1024;
+
   if (fileInput.files[0].size > maxFileSize) {
     alert(
       "Le fichier sélectionné est trop volumineux. La taille maximale est de 4 Mo."
     );
     document.getElementById("form-image").value = "";
   } else {
+
     if (fileInput.files.length > 0) {
       // Creation de l'image preview
       let previewImage = document.createElement("img");
       previewImage.setAttribute("id", "previewImage");
+
       previewImage.src = URL.createObjectURL(fileInput.files[0]);
       document.querySelector("#ajoutImg").appendChild(previewImage);
 
@@ -448,6 +502,7 @@ document.querySelector("#photoProjet").addEventListener("change", () => {
       const btnAjoutPhoto = document.querySelector(".btnAjout");
       const maxSize = document.querySelector("#format");
       const ajtImg = document.querySelector("#ajoutImg");
+
 
       iconImg.style.display = "none";
       btnAjoutPhoto.style.display = "none";
