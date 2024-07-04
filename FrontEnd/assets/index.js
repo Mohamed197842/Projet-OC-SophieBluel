@@ -171,6 +171,7 @@ function AdminUserChanges() {
     const boutonModifier = document.createElement("button");
     const iconModifier = document.createElement("i");
     iconModifier.classList.add("fa-regular", "fa-pen-to-square");
+    boutonModifier.classList.add("btnModifier")
     boutonModifier.appendChild(iconModifier);
     boutonModifier.appendChild(document.createTextNode(" modifier"));
     ajoutBtn.appendChild(boutonModifier);
@@ -250,7 +251,7 @@ function AdminUserChanges() {
       previewImage.remove();
      }
       // Réinitialiser les champs du formulaire
-     const form = document.getElementById("formWorks"); // Remplacez "formId" par l'ID de votre formulaire
+     const form = document.getElementById("formWorks"); // 
      if (form) {
       form.reset();
      }
@@ -511,3 +512,37 @@ document.querySelector("#photoProjet").addEventListener("change", () => {
     }
   }
 });
+
+
+// Fermer la modale au clique en dehors
+
+const affichermodale = document.querySelector('.modal-overlay')
+affichermodale.addEventListener('click',(event)=>{
+  
+  if (event.target==affichermodale) {
+    affichermodale.style.display = "none"
+
+    // Réinitialiser l'aperçu de l'image
+    const previewImage = document.getElementById("previewImage");
+   if (previewImage) {
+     previewImage.remove();
+   }
+    // Réinitialiser les champs du formulaire
+   const form = document.getElementById("formWorks"); 
+   if (form) {
+    form.reset();
+  }
+   const iconImg = document.querySelector("#iconImg");
+   const btnAjoutPhoto = document.querySelector(".btnAjout");
+   const maxSize = document.querySelector("#format");
+   const ajtImg = document.querySelector("#ajoutImg");
+
+   iconImg.style.display = "block";
+   btnAjoutPhoto.style.display = "block";
+   maxSize.style.display = "block";
+   ajtImg.style.padding = "45px 0px 10px 0px";
+
+  // Effacer le message d'erreur après réinitialisation du formulaire
+  document.getElementById("error-message").textContent = "";
+  }
+})
